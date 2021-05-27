@@ -126,7 +126,7 @@ export default function FooterCard() {
   const logged = useLoggedUserState();
   return (
     <Grid container spacing={3}>
-      <Grid item sm={4}>
+      <Grid item sm={logged ? 4: 6}>
         <Card className={classes.topcard}>
           <CardHeader
             subtitle={`${Suppliers.length} in total`}
@@ -168,7 +168,7 @@ export default function FooterCard() {
           </Box>
         </Card>
       </Grid>
-      <Grid item sm={4}>
+      <Grid item sm={logged ? 4: 6}>
         <Card className={classes.topcard}>
           <CardHeader
             subtitle={`${Buyers.length} in total`}

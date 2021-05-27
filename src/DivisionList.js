@@ -40,7 +40,11 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     flexDirection:'row',
     // justifyContent:'space-betweeen',
-    alignItems:"center"
+    alignItems:"center",
+    '& > div':{
+      // display:'flex',
+      flexBasis:'20%',
+    }
   },
   rowOdd: {
     "background-color": "#f5f3f2"
@@ -65,9 +69,10 @@ function getReveiewIcon(iconType) {
 function DataList({ list = [], openDetails, openFeedback }) {
   const classes = useStyles();
   const loggedUser = useLoggedUserState();
+  const headre =[];
 
-  return list.map(function (elem, index) {
-    return (
+  const arr = list.map(function (elem, index) {
+    return elem.name ? (
       <React.Fragment key={index}>
         <ListItem
           button
@@ -80,11 +85,11 @@ function DataList({ list = [], openDetails, openFeedback }) {
         >
           <ListItemText
             primary={elem.name}
-            secondary={elem.dnb_industry}
+            secondary={elem.industry_category}
             classes={{ primary: classes.primary }}
           />
-          <ListItemText primary={elem.state} />
-          <ListItemIcon>{getReveiewIcon(Math.floor(elem.Rating))}</ListItemIcon>
+          <ListItemText primary={elem.state} secondary={elem.city}/>
+          <ListItemIcon>{getReveiewIcon(Math.floor(elem.rating))}</ListItemIcon>
           {
             loggedUser ? (
               <IconButton
@@ -98,8 +103,13 @@ function DataList({ list = [], openDetails, openFeedback }) {
           }
         </ListItem>
       </React.Fragment>
-    );
+    ):false;
   });
+
+  return [
+    headre
+    ,...arr
+  ]
 }
 
 const mockList = [

@@ -94,26 +94,42 @@ export default function DivisionDetails(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Business Details"}</DialogTitle>
+        {/* <DialogTitle id="alert-dialog-title">{"Business Details"}</DialogTitle> */}
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <Typography className={classes.title} variant="h6">
+            {/* <Typography className={classes.title} variant="h6">
               {" "}
-              Name : {name}{" "}
+              Name : {" "}
             </Typography>
             <Typography className={classes.title} variant="h6">
               {" "}
-              Industry name : {industry_category}{" "}
+              Industry name : {" "}
             </Typography>
             <Typography className={classes.title} variant="h6">
               {" "}
-              Industry Sub Category : {industry_sub_category}{" "}
+              Industry Sub Category : {" "}
             </Typography>
             <Typography className={classes.title} variant="h6">
               {" "}
-              State : {state}{" "}
-            </Typography>
+              State : {" "}
+            </Typography> */}
 
+            
+            <Typography variant="h5" component="h2">
+              {name}
+            </Typography>
+            <Typography className={classes.title} color="textSecondary" gutterBottom>
+              {industry_category}
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {industry_sub_category}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {state}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {'   '}
+            </Typography>
             <Typography
               className={classes.title}
               variant="h6"
@@ -122,8 +138,8 @@ export default function DivisionDetails(props) {
               Rating :
               <Rating name="read-only" value={rating} readOnly />
             </Typography>
-            
-           
+
+
             <Typography
               className={classes.title}
               variant="h6"
@@ -132,7 +148,7 @@ export default function DivisionDetails(props) {
               Quality :
               <Rating value={quality_rating} />
             </Typography>
-           
+
             <Typography
               className={classes.title}
               variant="h6"
@@ -141,7 +157,7 @@ export default function DivisionDetails(props) {
               Timeline :
               <Rating value={timeline_rating} />
             </Typography>
-           
+
             <Typography
               className={classes.title}
               variant="h6"
@@ -150,7 +166,7 @@ export default function DivisionDetails(props) {
               Payment Terms :
               <Rating value={payment_terms_rating} />
             </Typography>
-           
+
             {/* <TextField
               multiline
               rows={4}

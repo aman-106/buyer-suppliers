@@ -15,7 +15,7 @@ import { baseurl, useLoggedUserState } from "./helper";
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
-    maxHeight: "400px",
+    maxHeight: "700px",
     overflowY: "scroll"
   },
   bullet: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     width: 400,
     backgroundColor: theme.palette.background.paper,
     // border: "2px solid #000",
-    top: "30%",
+    top: "10%",
     left: "34%",
     height: "400px",
     boxShadow: theme.shadows[5]
