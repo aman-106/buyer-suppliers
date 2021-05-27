@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
     padding: "12px",
     borderRadius: 8,
-    margin: "16px 16px"
+    margin: "16px 16px",
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   SearchForm: {
     display: "flex",
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
   },
   searchButton: {
     display: "flex",
-    width: "fit-content"
-  }
+    width: "fit-content",
+  },
 }));
 
 function useGetCatgory() {
@@ -54,7 +54,7 @@ function useGetCatgory() {
 
 const defaultState = {
   type: "",
-  category: ""
+  category: "",
 };
 
 function SearchForm(props) {
@@ -65,7 +65,7 @@ function SearchForm(props) {
       const value = event.target.value;
       updateState({
         ...state,
-        [key]: value
+        [key]: value,
       });
     };
   }
@@ -114,8 +114,8 @@ export default function FullWidthGrid() {
         method: "post",
         url: baseurl + path,
         data: {
-          industry_category: category
-        }
+          industry_category: category,
+        },
       });
       setSearch((response.data && response.data.entity_list) || []);
     } catch (e) {
@@ -126,46 +126,29 @@ export default function FullWidthGrid() {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Paper className={classes.paper}>
-            <DivisionList loadData={true}/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          {/* <Paper className={classes.paper}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                handleShowLogin(true);
-              }}
-            >
-              Login
-            </Button>
-          </Paper> */}
-          {/* {showLogin && <Login />} */}
-          {/* <Paper className={classes.paper}>login</Paper> */}
           <SearchForm
             onSearch={({ type, category }) => {
               handleSearch(type, category);
             }}
           />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <Paper className={classes.paper}>
+            <DivisionList loadData={true} />
+          </Paper>
         </Grid>
       </Grid>
     </div>
   ) : (
     <div className={classes.root}>
       <Grid container spacing={3}>
-
-      <Grid item xs={searched ? 3 : 9} sm={12}>
-          {/* <Paper className={classes.paper}>side bar</Paper> */}
+        <Grid item xs={12} sm={12}>
           <SearchForm
             onSearch={({ type, category }) => {
               handleSearch(type, category);
             }}
           />
-          {/* <Paper className={classes.paper}>login</Paper> */}
         </Grid>
-
         {searched && (
           <Grid item xs={12} sm={12}>
             <Paper className={classes.paper}>
@@ -173,7 +156,6 @@ export default function FullWidthGrid() {
             </Paper>
           </Grid>
         )}
-
       </Grid>
     </div>
   );
