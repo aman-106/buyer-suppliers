@@ -59,7 +59,7 @@ function SimpleRating({ value = 2 }) {
 }
 
 function getReveiewIcon(iconType) {
-  return <SimpleRating value={Math.floor(iconType)} />;
+  return <SimpleRating rate={Math.floor(iconType)} />;
 }
 
 function DataList({ list = [], openDetails, openFeedback }) {
