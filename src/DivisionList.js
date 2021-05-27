@@ -36,7 +36,11 @@ const useStyles = makeStyles((theme) => ({
   backgroundHover: {
     "&:hover": {
       "background-color": "rgba(4, 161, 200, 0.1)"
-    }
+    },
+    display:'flex',
+    flexDirection:'row',
+    // justifyContent:'space-betweeen',
+    alignItems:"center"
   },
   rowOdd: {
     "background-color": "#f5f3f2"
@@ -60,6 +64,7 @@ function getReveiewIcon(iconType) {
 
 function DataList({ list = [], openDetails, openFeedback }) {
   const classes = useStyles();
+  const loggedUser = useLoggedUserState();
 
   return list.map(function (elem, index) {
     return (
@@ -80,15 +85,17 @@ function DataList({ list = [], openDetails, openFeedback }) {
           />
           <ListItemText primary={elem.state} />
           <ListItemIcon>{getReveiewIcon(Math.floor(elem.Rating))}</ListItemIcon>
-          <ListItemSecondaryAction>
-            <IconButton
-              edge="end"
-              aria-label="rate_and_review"
-              onClick={openFeedback(index)}
-            >
-              <RateReviewIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
+          {
+            loggedUser ? (
+              <IconButton
+                edge="end"
+                aria-label="rate_and_review"
+                onClick={openFeedback(index)}
+              >
+                <RateReviewIcon />
+              </IconButton>
+            ):false
+          }
         </ListItem>
       </React.Fragment>
     );
