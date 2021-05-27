@@ -50,6 +50,14 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     // padding: theme.spacing(2, 4, 3)
   },
+  title: {
+    flexGrow: 1,
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block"
+    },
+    color: theme.palette.secondary.main
+  },
 }));
 
 export default function DivisionDetails(props) {
@@ -65,7 +73,7 @@ export default function DivisionDetails(props) {
   } = details;
 
   const [open, setOpen] = React.useState(true);
-
+  console.log("Details", rating)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -87,10 +95,10 @@ export default function DivisionDetails(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-         <Typography> Name : {name} </Typography>
-         <Typography> Industry name : {industry_category} </Typography>
-         <Typography> Industry Sub Category : {industry_sub_category} </Typography>
-         <Typography> State : {state} </Typography>
+         <Typography className={classes.title} variant="h6"> Name : {name} </Typography>
+         <Typography className={classes.title} variant="h6"> Industry name : {industry_category} </Typography>
+         <Typography className={classes.title} variant="h6"> Industry Sub Category : {industry_sub_category} </Typography>
+         <Typography className={classes.title} variant="h6"> State : {state} </Typography>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
