@@ -14,6 +14,7 @@ import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import { useLoggedUserState } from "./helper";
 
 const useStyles = makeStyles((theme) => ({
   topcard: {
@@ -90,31 +91,31 @@ const Buyers = [
 const Industries = [
   {
     id: "1",
-    name: "Healthcare",
+    name: "Staff USA Inc.",
     imageUrl: "/avatar_6.png",
     updatedAt: "Updated 2 hours ago"
   },
   {
     id: "2",
-    name: "Finance",
+    name: "Allstar Marketing Group, LLC",
     imageUrl: "/static/images/products/product_2.png",
     updatedAt: "Updated 3 hours ago"
   },
   {
     id: "3",
-    name: "Biotechnology",
+    name: "Fashion Avenue Knits Inc.",
     imageUrl: "/static/images/products/product_3.png",
     updatedAt: "Updated 2 days ago"
   },
   {
     id: "4",
-    name: "Utilities",
+    name: "Lucent Jewelers, Inc.",
     imageUrl: "/static/images/products/product_4.png",
     updatedAt: "Updated 6 hours ago"
   },
   {
     id: "5",
-    name: "Retail",
+    name: "Kikkerland Design, Inc.",
     imageUrl: "/static/images/products/product_5.png",
     updatedAt: "Updated 6 days ago"
   }
@@ -122,6 +123,7 @@ const Industries = [
 
 export default function SearchAppBar() {
   const classes = useStyles();
+  const logged = useLoggedUserState();
   return (
     <Grid container spacing={3}>
       <Grid item sm={4}>
@@ -208,14 +210,14 @@ export default function SearchAppBar() {
           </Box>
         </Card>
       </Grid>
-      <Grid item sm={4}>
+      {logged ? <Grid item sm={4}>
         <Card className={classes.topcard}>
           <CardHeader
             subtitle={`${Industries.length} in total`}
-            title="Top 5 Industries"
+            title="Supplier Near your location"
           />
           <Divider />
-          <List>
+           <List>
             {Industries.map((product, i) => (
               <ListItem divider={i < Industries.length - 1} key={product.id}>
                 <ListItemText
@@ -249,7 +251,7 @@ export default function SearchAppBar() {
             </Button>
           </Box>
         </Card>
-      </Grid>
+          </Grid> : "" }
     </Grid>
   );
 }
