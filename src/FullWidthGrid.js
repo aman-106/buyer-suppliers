@@ -126,7 +126,7 @@ export default function FullWidthGrid() {
   return logged ? (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12} sm={12}>
           <Paper className={classes.paper}>
             <DivisionList />
           </Paper>
@@ -157,7 +157,7 @@ export default function FullWidthGrid() {
     <div className={classes.root}>
       <Grid container spacing={3}>
         {searched && (
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={12} sm={12}>
             <Paper className={classes.paper}>
               <DivisionList list={searched || []} />
             </Paper>

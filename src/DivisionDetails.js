@@ -9,40 +9,47 @@ import { TextField } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useLoggedUserState } from "./helper";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
-    height: "100%"
+    height: "100%",
   },
   bullet: {
     display: "inline-block",
     margin: "0 2px",
-    transform: "scale(0.8)"
+    transform: "scale(0.8)",
   },
   title: {
-    fontSize: 14
+    fontSize: 14,
   },
   pos: {
-    marginBottom: 12
+    marginBottom: 12,
   },
   content: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    height: "180px"
+    height: "180px",
   },
   paper: {
     position: "absolute",
     width: 400,
     backgroundColor: theme.palette.background.paper,
     // border: "2px solid #000",
+    borderRadius: 8,
     top: "10%",
     left: "34%",
     height: "600px",
-    boxShadow: theme.shadows[5]
+    boxShadow: theme.shadows[5],
     // padding: theme.spacing(2, 4, 3)
-  }
+  },
 }));
 
 export default function DivisionDetails(props) {
@@ -53,39 +60,45 @@ export default function DivisionDetails(props) {
     industry_category,
     industry_sub_category,
     rating,
-    state
+    state,
+    openDetails
   } = details;
+
+  const [open, setOpen] = React.useState(true);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    openDetails(false);
+  };
+
   return (
     <React.Fragment>
-      <Modal open>
-        <div className={classes.paper}>
-          <Card className={classes.root}>
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                {name}
-              </Typography>
-              <Typography variant="h5" component="h2">
-                {industry_category}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                {industry_sub_category}
-              </Typography>
-              <Typography variant="body2" component="p">
-                {state}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              {/* <Button size="small" onClick={openFeedback}>
-                Provide feedback
-              </Button> */}
-            </CardActions>
-          </Card>
-        </div>
-      </Modal>
+      <Dialog
+        open
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Business Details"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+         <Typography> Name : {name} </Typography>
+         <Typography> Industry name : {industry_category} </Typography>
+         <Typography> Industry Sub Category : {industry_sub_category} </Typography>
+         <Typography> State : {state} </Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </React.Fragment>
   );
 }
