@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     width: "fit-content",
   },
+  width:{
+    width:'300px'
+  }
 }));
 
 function useGetCatgory() {
@@ -73,11 +76,11 @@ function SearchForm(props) {
   const category = useGetCatgory();
   return (
     <Paper className={clsx(classes.paper, classes.SearchForm)}>
-      <TextField select label="Type" onChange={handleChange("type")}>
+      <TextField select label="Type" onChange={handleChange("type")} classes={{root:classes.width}}>
         <MenuItem value="buyer">Buyer </MenuItem>
         <MenuItem value="supplier">Supplier </MenuItem>
       </TextField>
-      <TextField select label="Category" onChange={handleChange("category")}>
+      <TextField select label="Category" onChange={handleChange("category")} classes={{root:classes.width}}>
         {/* <MenuItem>A1 </MenuItem>
         <MenuItem>s1 </MenuItem> */}
         {category.map(function (elem) {
