@@ -2,6 +2,7 @@ import "./styles.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import SearchAppBar from "./SearchAppBar";
 import FullWidthGrid from "./FullWidthGrid";
+import SmallChips from "./HeaderCard";
 import { Grid } from "@material-ui/core";
 import DashboardSidebar from "./DashBoardSideBar";
 import LatestProducts from "./FooterCard";
@@ -51,6 +52,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <SearchAppBar />
+        <SmallChips />
         <Grid container spacing={3}>
           {/* <Grid item md={3}>
             <DashboardSidebar />
