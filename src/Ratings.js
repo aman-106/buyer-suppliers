@@ -3,7 +3,7 @@ import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
-export default function SimpleRating({ rate = 2 }) {
+export default function SimpleRating({ rate = 2 ,updateValue}) {
   const [value, setValue] = React.useState(rate);
 
   return (
@@ -14,6 +14,7 @@ export default function SimpleRating({ rate = 2 }) {
           name="simple-controlled"
           value={value}
           onChange={(event, newValue) => {
+            updateValue && updateValue(newValue);
             setValue(newValue);
           }}
         />

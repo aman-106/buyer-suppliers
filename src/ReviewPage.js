@@ -10,7 +10,7 @@ import Modal from "@material-ui/core/Modal";
 import MenuItem from "@material-ui/core/MenuItem";
 import CustomizedRatings from "./Ratings";
 import axios from "axios";
-import { baseurl } from "./helper";
+import { baseurl, useLoggedUserState } from "./helper";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,10 +57,27 @@ export default function ReviewPage({ details }) {
     quality_rating,
     payment_terms_rating
   } = details;
+  const loggedUser = useLoggedUserState();
   // const [showModal, setModalState] = useState(true);
-
-  async function submitReview(rating, review, uuid) {
+  const [state , setState ] = useState({});
+  function updateValue(key){
+    return function(event){
+      let value = event;
+      if(key==='review'){
+        value = event.target.value;
+      }
+      setState({
+        ...state,
+        [key]:value,
+       }
+      );
+    };
+  }
+  
+  async function submitReview() {
     try {
+      const uuid = loggedUser.uuid;
+      const { rating, } = state ;
       const response = await axios({
         url: baseurl + "submitReview",
         method: "post",
@@ -72,6 +89,7 @@ export default function ReviewPage({ details }) {
       });
     } catch (e) {}
   }
+
 
   return (
     <Modal open>
@@ -85,27 +103,30 @@ export default function ReviewPage({ details }) {
             >
               Review
             </Typography>
-            <TextField label={"User Name"} variant="outlined" select>
+            {/* <TextField label={"User Name"} variant="outlined" select>
               <MenuItem value={10}> {name}</MenuItem>
-            </TextField>
+            </TextField> */}
+            <Typography component="legend">{name}</Typography>
             <Typography component="legend">Rating</Typography>
-            <CustomizedRatings value={rating} />
+            <CustomizedRatings value={rating} updateValue={updateValue('rating')}/>
             <Typography component="legend">Quality</Typography>
-            <CustomizedRatings value={quality_rating} />
+            <CustomizedRatings value={quality_rating} updateValue={updateValue('quality_rating')}/>
             <Typography component="legend">Timeline</Typography>
-            <CustomizedRatings value={timeline_rating} />
+            <CustomizedRatings value={timeline_rating} updateValue={updateValue('timeline_rating')} />
             <Typography component="legend">Payment Terms</Typography>
-            <CustomizedRatings value={payment_terms_rating} />
+            <CustomizedRatings value={payment_terms_rating} updateValue={updateValue('payment_terms_rating')}/>
             <TextField
               multiline
               rows={4}
               variant="outlined"
               label="Additional Comments"
+              value={state.review}
+              onChange={updateValue('review')}
             />
             {/* <TextField label={"Password"} variant="outlined"></TextField> */}
           </CardContent>
           <CardActions>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={submitReview}>
               Submit
             </Button>
             <Button
