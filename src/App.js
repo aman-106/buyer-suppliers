@@ -6,7 +6,14 @@ import SmallChips from "./HeaderCard";
 import { Grid } from "@material-ui/core";
 import DashboardSidebar from "./DashBoardSideBar";
 import LatestProducts from "./FooterCard";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 const theme = createMuiTheme({
   palette: {
     common: {
@@ -47,22 +54,45 @@ const theme = createMuiTheme({
   }
 });
 
+
+
+function setV(uuid){
+  localStorage.setItem("uuid",uuid);
+}
+
+
+function Comp(){
+  let { uuid } = useParams();
+  setV(uuid);
+  return (
+    <div className="App">
+    <SearchAppBar />
+    <SmallChips />
+    <Grid container spacing={3}>
+      {/* <Grid item md={3}>
+        <DashboardSidebar />
+      </Grid>
+      <Grid item md={9}>
+      </Grid> */}
+      <FullWidthGrid />
+    </Grid>
+    <LatestProducts />
+  </div>
+  )
+}
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <SearchAppBar />
-        <SmallChips />
-        <Grid container spacing={3}>
-          {/* <Grid item md={3}>
-            <DashboardSidebar />
-          </Grid>
-          <Grid item md={9}>
-          </Grid> */}
-          <FullWidthGrid />
-        </Grid>
-        <LatestProducts />
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/:uuid">
+            <Comp />
+          </Route>
+          <Route path="/">
+            <Comp />
+          </Route>
+        </Switch>
+        </Router>
     </ThemeProvider>
   );
 }

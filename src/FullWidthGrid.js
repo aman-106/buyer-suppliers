@@ -128,7 +128,7 @@ export default function FullWidthGrid() {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Paper className={classes.paper}>
-            <DivisionList />
+            <DivisionList loadData={true}/>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={3}>

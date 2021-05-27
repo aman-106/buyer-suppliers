@@ -130,6 +130,7 @@ const mockList = [
     Review: "Good"
   }
 ];
+let load = false;
 
 export default function DivisionList({ list = [], loadData = false }) {
   const classes = useStyles();
@@ -147,13 +148,16 @@ export default function DivisionList({ list = [], loadData = false }) {
   }
 
   async function getEnagagedEntity(uuid) {
-    const response = await axios({
-      url: baseurl + "getEngagedEntity",
-      data: {
-        uuid
-      }
-    });
-    setDataList((response.data && response.data.entity_list) || []);
+    try{
+      const response = await axios({
+        method:"post",
+        url: baseurl + "getEngagedEntity/",
+        data: {
+          uuid
+        }
+      });
+     setDataList((response.data && response.data.entity_list) || []);
+    }catch(e){}
   }
 
   useEffect(() => {
@@ -167,6 +171,9 @@ export default function DivisionList({ list = [], loadData = false }) {
     if(!loadData){
       setDataList(list);
     }
+    // return ()=>{
+    //   load  = false;
+    // }
   },[list]);
 
   function handleOpenFeedback(index) {
