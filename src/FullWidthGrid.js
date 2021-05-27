@@ -132,7 +132,7 @@ export default function FullWidthGrid() {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Paper className={classes.paper}>
+          {/* <Paper className={classes.paper}>
             <Button
               variant="contained"
               color="secondary"
@@ -142,9 +142,14 @@ export default function FullWidthGrid() {
             >
               Login
             </Button>
-          </Paper>
-          {showLogin && <Login />}
+          </Paper> */}
+          {/* {showLogin && <Login />} */}
           {/* <Paper className={classes.paper}>login</Paper> */}
+          <SearchForm
+            onSearch={({ type, category }) => {
+              handleSearch(type, category);
+            }}
+          />
         </Grid>
       </Grid>
     </div>
