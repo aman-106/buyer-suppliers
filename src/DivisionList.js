@@ -171,7 +171,7 @@ export default function DivisionList({ list = [], loadData = false }) {
 
   function handleOpenFeedback(index) {
     return function (event) {
-      event.stopPropagation();,
+      event.stopPropagation();
       setSelectedIndex(index);
       openFeedback(true);
     };
