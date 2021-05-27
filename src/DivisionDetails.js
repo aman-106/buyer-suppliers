@@ -9,12 +9,13 @@ import { TextField } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useLoggedUserState } from "./helper";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import SimpleRating from './DivisionList';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import SimpleRating from "./DivisionList";
+import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,15 +55,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "none",
     [theme.breakpoints.up("sm")]: {
-      display: "block"
+      display: "block",
     },
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
   },
 }));
 
 export default function DivisionDetails(props) {
   const classes = useStyles();
-  const { details ,closeDetails} = props;
+  const { details, closeDetails } = props;
   const {
     name,
     industry_category,
@@ -71,12 +72,12 @@ export default function DivisionDetails(props) {
     state,
     quality_rating,
     timeline_rating,
-    payment_terms_rating
+    payment_terms_rating,
     // openDetails
   } = details;
 
   const [open, setOpen] = React.useState(true);
-  console.log("Details", rating)
+  console.log("Details", quality_rating);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -93,25 +94,63 @@ export default function DivisionDetails(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Business Details"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Business Details"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-         <Typography className={classes.title} variant="h6"> Name : {name} </Typography>
-         <Typography className={classes.title} variant="h6"> Industry name : {industry_category} </Typography>
-         <Typography className={classes.title} variant="h6"> Industry Sub Category : {industry_sub_category} </Typography>
-         <Typography className={classes.title} variant="h6"> State : {state} </Typography>
-          </DialogContentText>
-          <Typography component="legend">{name}</Typography>
-            <Typography component="legend">Rating</Typography>
-            <SimpleRating rate={rating} />
-            <Typography component="legend">Quality</Typography>
-            <SimpleRating rate={quality_rating} />
-            <Typography component="legend">Timeline</Typography>
-            <SimpleRating rate={timeline_rating}  />
-            <Typography component="legend">Payment Terms</Typography>
-            <SimpleRating rate={payment_terms_rating} />
+            <Typography className={classes.title} variant="h6">
+              {" "}
+              Name : {name}{" "}
+            </Typography>
+            <Typography className={classes.title} variant="h6">
+              {" "}
+              Industry name : {industry_category}{" "}
+            </Typography>
+            <Typography className={classes.title} variant="h6">
+              {" "}
+              Industry Sub Category : {industry_sub_category}{" "}
+            </Typography>
+            <Typography className={classes.title} variant="h6">
+              {" "}
+              State : {state}{" "}
+            </Typography>
+
+            <Typography
+              className={classes.title}
+              variant="h6"
+              component="legend"
+            >
+              Rating :
+              <Rating name="read-only" value={rating} readOnly />
+            </Typography>
+            
+           
+            <Typography
+              className={classes.title}
+              variant="h6"
+              component="legend"
+            >
+              Quality :
+              <Rating value={quality_rating} />
+            </Typography>
+           
+            <Typography
+              className={classes.title}
+              variant="h6"
+              component="legend"
+            >
+              Timeline :
+              <Rating value={timeline_rating} />
+            </Typography>
+           
+            <Typography
+              className={classes.title}
+              variant="h6"
+              component="legend"
+            >
+              Payment Terms :
+              <Rating value={payment_terms_rating} />
+            </Typography>
+           
             {/* <TextField
               multiline
               rows={4}
@@ -119,6 +158,7 @@ export default function DivisionDetails(props) {
               label="Additional Comments"
               value={state.review}
             /> */}
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary" autoFocus>

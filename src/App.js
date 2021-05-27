@@ -5,7 +5,7 @@ import FullWidthGrid from "./FullWidthGrid";
 import SmallChips from "./HeaderCard";
 import { Grid } from "@material-ui/core";
 import DashboardSidebar from "./DashBoardSideBar";
-import LatestProducts from "./FooterCard";
+import FooterCard from "./FooterCard";
 import {
   BrowserRouter as Router,
   Switch,
@@ -76,7 +76,7 @@ function Comp(){
       </Grid> */}
       <FullWidthGrid />
     </Grid>
-    <LatestProducts />
+    <FooterCard />
   </div>
   )
 }

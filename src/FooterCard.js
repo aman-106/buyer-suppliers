@@ -121,7 +121,7 @@ const Industries = [
   }
 ];
 
-export default function SearchAppBar() {
+export default function FooterCard() {
   const classes = useStyles();
   const logged = useLoggedUserState();
   return (
@@ -214,7 +214,7 @@ export default function SearchAppBar() {
         <Card className={classes.topcard}>
           <CardHeader
             subtitle={`${Industries.length} in total`}
-            title="Supplier Near your location"
+            title="Suppliers Near your location"
           />
           <Divider />
            <List>
