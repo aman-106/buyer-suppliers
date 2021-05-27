@@ -89,7 +89,8 @@ export default function ReviewPage({ details,closeFeedback }) {
         data: {
           rating:Number(rating || 0 ),
           review:review|| '',
-          uuid
+          uuid,
+          given_by:'tom smith'
         }
       });
       console.log(response.data);

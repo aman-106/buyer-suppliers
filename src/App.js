@@ -63,7 +63,7 @@ function setV(uuid){
 
 function Comp(){
   let { uuid } = useParams();
-  setV(uuid);
+  uuid && setV(uuid);
   return (
     <div className="App">
     <SearchAppBar />
