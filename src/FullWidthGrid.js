@@ -82,7 +82,7 @@ function SearchForm(props) {
         {/* <MenuItem>A1 </MenuItem>
         <MenuItem>s1 </MenuItem> */}
         {category.map(function (elem) {
-          return <MenuItem> {elem}</MenuItem>;
+          return <MenuItem value={elem}> {elem}</MenuItem>;
         })}
       </TextField>
       <Button
@@ -109,8 +109,8 @@ export default function FullWidthGrid() {
     try {
       const path =
         type === "buyer"
-          ? "getBuyerBasedOnCategory"
-          : "getSupplierBasedOnCategory";
+          ? "getBuyerBasedOnCategory/"
+          : "getSupplierBasedOnCategory/";
       const response = await axios({
         method: "post",
         url: baseurl + path,
