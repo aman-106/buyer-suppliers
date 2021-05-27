@@ -14,7 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import SimpleRating from './DivisionList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,6 +69,9 @@ export default function DivisionDetails(props) {
     industry_sub_category,
     rating,
     state,
+    quality_rating,
+    timeline_rating,
+    payment_terms_rating
     // openDetails
   } = details;
 
@@ -100,6 +103,22 @@ export default function DivisionDetails(props) {
          <Typography className={classes.title} variant="h6"> Industry Sub Category : {industry_sub_category} </Typography>
          <Typography className={classes.title} variant="h6"> State : {state} </Typography>
           </DialogContentText>
+          <Typography component="legend">{name}</Typography>
+            <Typography component="legend">Rating</Typography>
+            <SimpleRating rate={rating} />
+            <Typography component="legend">Quality</Typography>
+            <SimpleRating rate={quality_rating} />
+            <Typography component="legend">Timeline</Typography>
+            <SimpleRating rate={timeline_rating}  />
+            <Typography component="legend">Payment Terms</Typography>
+            <SimpleRating rate={payment_terms_rating} />
+            {/* <TextField
+              multiline
+              rows={4}
+              variant="outlined"
+              label="Additional Comments"
+              value={state.review}
+            /> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary" autoFocus>

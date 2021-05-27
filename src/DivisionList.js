@@ -47,12 +47,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function SimpleRating({ value = 2 }) {
+export function SimpleRating({ rate = 2 }) {
   return (
     <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend"></Typography>
-        <Rating name="read-only" value={value} readOnly />
+        <Rating name="read-only" value={rate} readOnly />
       </Box>
     </div>
   );
