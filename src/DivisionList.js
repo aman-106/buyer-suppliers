@@ -124,7 +124,7 @@ const mockList = [
   }
 ];
 
-export default function DivisionList({ list = mockList, loadData = false }) {
+export default function DivisionList({ list = [], loadData = false }) {
   const classes = useStyles();
   const [showDetails, openDetails] = useState(false);
   const loggedUser = useLoggedUserState();
@@ -155,6 +155,12 @@ export default function DivisionList({ list = mockList, loadData = false }) {
       getEnagagedEntity(uuid);
     }
   }, []);
+
+  useEffect(()=>{
+    if(!loadData){
+      setDataList(list);
+    }
+  },[list]);
 
   function handleOpenFeedback(index) {
     return function () {
