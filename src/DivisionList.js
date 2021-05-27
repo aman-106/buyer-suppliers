@@ -184,6 +184,20 @@ export default function DivisionList({ list = [], loadData = false }) {
     };
   }
 
+  function closeFeedback(){
+    openFeedback(false);
+    if (loadData) {
+      const uuid = loggedUser && loggedUser.uuid;
+      getEnagagedEntity(uuid);
+    }else{
+
+    }
+  }
+
+  function closeDetails(){
+    openDetails(false);
+  }
+
   return (
     <div className={classes.root}>
       <DataList
@@ -194,11 +208,13 @@ export default function DivisionList({ list = [], loadData = false }) {
       {showDetails && (
         <DivisionDetails
           details={dataList && dataList.length && dataList[selectedIndex]}
+          closeDetails={closeDetails}
         />
       )}
       {feedback && (
         <ReviewPage
           details={dataList && dataList.length && dataList[selectedIndex]}
+          closeFeedback={closeFeedback}
         />
       )}
     </div>

@@ -54,14 +54,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DivisionDetails(props) {
   const classes = useStyles();
-  const { details } = props;
+  const { details ,closeDetails} = props;
   const {
     name,
     industry_category,
     industry_sub_category,
     rating,
     state,
-    openDetails
+    // openDetails
   } = details;
 
   const [open, setOpen] = React.useState(true);
@@ -71,7 +71,7 @@ export default function DivisionDetails(props) {
   };
 
   const handleClose = () => {
-    openDetails(false);
+    closeDetails(false);
   };
 
   return (

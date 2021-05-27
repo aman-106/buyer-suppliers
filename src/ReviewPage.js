@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ReviewPage({ details }) {
+export default function ReviewPage({ details,closeFeedback }) {
   const classes = useStyles();
   const {
     name,
@@ -59,7 +59,12 @@ export default function ReviewPage({ details }) {
   } = details;
   const loggedUser = useLoggedUserState();
   // const [showModal, setModalState] = useState(true);
-  const [state , setState ] = useState({});
+  const [state , setState ] = useState({
+    rating,
+    timeline_rating,
+    quality_rating,
+    payment_terms_rating
+  });
   function updateValue(key){
     return function(event){
       let value = event;
@@ -77,17 +82,22 @@ export default function ReviewPage({ details }) {
   async function submitReview() {
     try {
       const uuid = loggedUser.uuid;
-      const { rating, } = state ;
+      const { rating,review } = state ;
       const response = await axios({
-        url: baseurl + "submitReview",
+        url: baseurl + "submitReview/",
         method: "post",
         data: {
-          rating,
-          review,
+          rating:Number(rating || 0 ),
+          review:review|| '',
           uuid
         }
       });
-    } catch (e) {}
+      console.log(response.data);
+      closeFeedback();
+    } catch (e) {
+      console.log(e)
+      closeFeedback();
+    }
   }
 
 
@@ -108,13 +118,13 @@ export default function ReviewPage({ details }) {
             </TextField> */}
             <Typography component="legend">{name}</Typography>
             <Typography component="legend">Rating</Typography>
-            <CustomizedRatings value={rating} updateValue={updateValue('rating')}/>
+            <CustomizedRatings rate={rating} updateValue={updateValue('rating')}/>
             <Typography component="legend">Quality</Typography>
-            <CustomizedRatings value={quality_rating} updateValue={updateValue('quality_rating')}/>
+            <CustomizedRatings rate={quality_rating} updateValue={updateValue('quality_rating')}/>
             <Typography component="legend">Timeline</Typography>
-            <CustomizedRatings value={timeline_rating} updateValue={updateValue('timeline_rating')} />
+            <CustomizedRatings rate={timeline_rating} updateValue={updateValue('timeline_rating')} />
             <Typography component="legend">Payment Terms</Typography>
-            <CustomizedRatings value={payment_terms_rating} updateValue={updateValue('payment_terms_rating')}/>
+            <CustomizedRatings rate={payment_terms_rating} updateValue={updateValue('payment_terms_rating')}/>
             <TextField
               multiline
               rows={4}
@@ -132,7 +142,7 @@ export default function ReviewPage({ details }) {
             <Button
               variant="contained"
               color="Primary"
-              // onClick={setModalState(false)}
+              onClick={closeFeedback}
             >
               Cancel
             </Button>
