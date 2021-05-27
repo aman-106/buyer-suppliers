@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
     padding: "12px",
     borderRadius: 8,
-    margin: "24px 16px"
+    margin: "16px 16px"
   },
   paper: {
     padding: theme.spacing(2),
@@ -25,9 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   SearchForm: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "space-between",
-    height: "230px"
   },
   searchButton: {
     display: "flex",
@@ -156,14 +155,8 @@ export default function FullWidthGrid() {
   ) : (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        {searched && (
-          <Grid item xs={12} sm={12}>
-            <Paper className={classes.paper}>
-              <DivisionList list={searched || []} />
-            </Paper>
-          </Grid>
-        )}
-        <Grid item xs={searched ? 3 : 9} sm={12}>
+
+      <Grid item xs={searched ? 3 : 9} sm={12}>
           {/* <Paper className={classes.paper}>side bar</Paper> */}
           <SearchForm
             onSearch={({ type, category }) => {
@@ -172,6 +165,15 @@ export default function FullWidthGrid() {
           />
           {/* <Paper className={classes.paper}>login</Paper> */}
         </Grid>
+
+        {searched && (
+          <Grid item xs={12} sm={12}>
+            <Paper className={classes.paper}>
+              <DivisionList list={searched || []} />
+            </Paper>
+          </Grid>
+        )}
+
       </Grid>
     </div>
   );
